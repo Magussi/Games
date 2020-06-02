@@ -1,0 +1,75 @@
+import turtle
+from turtle import *
+
+poop = turtle.Turtle()
+screen = Screen()
+
+colors = ["red", "blue", "green", "purple", "yellow", "orange", "black"]
+poop.shape("triangle")
+poop.color("white")
+poop.pensize(5)
+
+pen = turtle.Turtle()
+pen.hideturtle()
+
+for i in range(2):
+    pen.forward(80)
+    pen.left(90)
+    pen.forward(30)
+    pen.left(90)
+
+pen.penup()
+pen.goto(7, 6)
+pen.write("Click Me!", font=("Arial",12,"normal"))
+
+def btclick(x, y):
+    if x > 0 and x < 81 and y > 0 and y < 30:
+        print("Oops! You've shit yourself!")
+    poop.color("brown")
+
+turtle.onscreenclick(btclick, 1)
+
+def up():
+    poop.setheading(90)
+    poop.forward(100)
+
+def down():
+    poop.setheading(270)
+    poop.forward(100)
+
+def left():
+    poop.setheading(180)
+    poop.forward(100)
+
+def right():
+    poop.setheading(0)
+    poop.forward(100)
+
+def dragging (x, y):
+    poop.ondrag(None)
+    poop.setheading(poop.towards(x, y))
+    poop.goto(x, y)
+    poop.ondrag(dragging)
+
+def clickright(x, y):
+    poop.clear()
+
+turtle.listen()  # Makes it listen
+
+turtle.onscreenclick(clickright, 3)
+
+turtle.onkey(up, "w")
+turtle.onkey(down, "s")
+turtle.onkey(left, "a")
+turtle.onkey(right, "d")
+
+def main():
+    turtle.listen()
+
+    poop.ondrag(dragging)
+
+    turtle.onscreenclick(clickright, 3)
+
+    screen.mainloop()
+
+main()
